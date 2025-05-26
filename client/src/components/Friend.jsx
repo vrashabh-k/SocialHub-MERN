@@ -23,7 +23,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
 
   const patchFriend = async () => {
     const response = await fetch(
-      `${process.env.REACT_APP_FRONTEND_BASE_URL}/users/${_id}/${friendId}`,
+      `${process.env.REACT_APP_BACKEND_BASE_URL}/users/${_id}/${friendId}`,
       {
         method: "PATCH",
         headers: {

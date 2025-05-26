@@ -22,7 +22,7 @@ const UserWidget = ({ userId, picturePath }) => {
   const main = palette.neutral.main;
 
   const getUser = async () => {
-    const response = await fetch(`${process.env.REACT_APP_FRONTEND_BASE_URL}/users/${userId}`, {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/users/${userId}`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });
