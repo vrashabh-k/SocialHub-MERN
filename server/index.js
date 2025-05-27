@@ -30,15 +30,27 @@ app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 
-app.use(
-  cors({
-    origin: "https://socialhub-black.vercel.app", // 👈 Allow your frontend domain
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true, // 👈 If you're using cookies or tokens in headers
-  })
-);
-app.options("*", cors()); // 👈 handles preflight across all routes
+// app.use(
+//   cors({
+//     origin: "https://socialhub-black.vercel.app", 
+//     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+//     allowedHeaders: ["Content-Type", "Authorization"],
+//     credentials: true, // If you're using cookies or tokens in headers
+//   })
+// );
+// app.options("*", cors()); //  handles preflight across all routes
+
+// CORS config
+const corsOptions = {
+  origin: "https://socialhub-black.vercel.app",
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
+};
+
+app.options("*", cors(corsOptions)); // Must come BEFORE other routes
+app.use(cors(corsOptions));
+
 
 
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
